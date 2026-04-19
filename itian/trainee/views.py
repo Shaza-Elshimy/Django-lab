@@ -47,7 +47,15 @@ def addtrainee(request):
 
 def updatetrainee(request,id):
     trainee = Trainee.objects.get(id=id)
-    return render(request,'trainee_update.html', {'trainee': trainee})
+    courses=Course.objects.all()
+    if request.method == 'POST':
+        trainee.name = request.POST.get('name')
+        trainee.age = request.POST.get('age')
+        courses_ids = request.POST.getlist('course')
+        trainee.course.set(courses_ids)
+        trainee.save()
+        return redirect('trainee_list')
+    return render(request,'trainee_update.html', {'trainee': trainee, 'courses': courses})
 
 def deletetrainee(request,id):
     trainee = Trainee.objects.get(id=id)
