@@ -1,0 +1,13 @@
+
+{% extends 'parent.html' %}
+
+{% block content %}
+<div style="background-color: aliceblue; border-radius: 15px; border: 1px solid #ccc; padding: 20px; width: 50%; margin: auto;">
+    <h3>Delete trainee</h3>
+    <p>Are you sure you want to delete trainee "{{ trainee.name }}"?</p>
+    <form method="post" style="width: 100%; margin: auto;">
+        {% csrf_token %}
+        <input type="submit" value="Confirm Delete" style="background-color: red; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
+    </form>
+</div>
+{% endblock %}

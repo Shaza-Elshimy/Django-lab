@@ -59,6 +59,9 @@ def updatetrainee(request,id):
 
 def deletetrainee(request,id):
     trainee = Trainee.objects.get(id=id)
+    if request.method == 'POST':
+        trainee.delete()
+        return redirect('trainee_list')
     return render(request,'trainee_delete.html', {'trainee': trainee})
 
 def gettraineebyid(request,id):
