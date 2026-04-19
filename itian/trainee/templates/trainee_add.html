@@ -1,7 +1,8 @@
 {% extends 'parent.html' %}
 
 {% block content %}
-    <h3>Add a new trainee</h3>
+    <h3  style="text-align: center;">Add a new trainee</h3>
+    <div style="background-color: aliceblue; border-radius: 15px; border: 1px solid #ccc; padding: 20px; width: 50%; margin: auto;">
         <form method="post" style="width: 100%;">
             {% csrf_token %}
             <label for="name">Name:</label>
@@ -14,8 +15,10 @@
                     <option value="{{ course.id }}">{{ course.name }}</option>
                 {% endfor %}
             </select><br><br>
-            <input type="submit" value="Add Trainee">
+            <input type="submit" value="Add Trainee" style="background-color: yellowgreen; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">
         </form>
+    </div>
+        
         
 
 {% endblock %}

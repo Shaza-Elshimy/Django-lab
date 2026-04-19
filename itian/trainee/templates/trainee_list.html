@@ -2,10 +2,12 @@
 
 {% block content %}
     <h3>List of trainees</h3>
-    <table border="1" cellpadding="5" cellspacing="0" width="100%">
+    <table border="1" cellpadding="5" cellspacing="0" width="100%" text-align="center">
         <tr style="background-color: #f2f2f2;">
             <th>Name</th>
             <th>Age</th>
+            <th>Courses</th>
+            <th>Actions</th>
         </tr>
         {% for trainee in trainees %}
             <tr style="background-color: #fff;">
@@ -18,7 +20,17 @@
                         {% endfor %}
                     </ul>
                 </td>
+                <td>
+                    <div style="display: flex; gap: 10px;width: 100% ; justify-content: center;">
+                        <a href="{% url 'trainee_details' trainee.id %}" style="background-color: blue; color: white; padding: 5px 10px; text-decoration: none;">Details</a> 
+                        <a href="{% url 'trainee_update' trainee.id %}" style="background-color: yellow; color: black; padding: 5px 10px; text-decoration: none;"> Update</a> 
+                        <a href="{% url 'trainee_delete' trainee.id %}" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none;">Delete</a>
+                    </div>
+                    
+                </td>
             </tr>
         {% endfor %}
     </table>
+    <br><br>
+    <a href="{% url 'trainee_add' %}" style="background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Add New Trainee</a>
 {% endblock %}
