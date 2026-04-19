@@ -3,7 +3,7 @@ from django.urls import path
 
 from .views import *
 
-urlspatterns=[
+urlpatterns=[
     path('',listtrainee,name='trainee_list'),
     path('add/',addtrainee,name='trainee_add'),
     path('<int:id>/update/',updatetrainee,name='trainee_update'),
