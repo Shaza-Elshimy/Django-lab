@@ -1,0 +1,10 @@
+{% extends 'parent.html' %}
+
+{% block content %}
+    <h3>List of trainees</h3>
+    <ul>
+        {% for trainee in trainees %}
+            <li>name:{{ trainee.name }} <br> age:{{ trainee.age }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
