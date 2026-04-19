@@ -22,9 +22,11 @@
 #     return HttpResponse(f'Trainee details for id {id}')
 # ---------------------------------------------------------------------
 
-from django.shortcuts import render
+from urllib import request
 
-from .models import Trainee
+from django.shortcuts import redirect, render
+
+from .models import *
 # Create your views here.
 
 def listtrainee(request):
@@ -32,7 +34,16 @@ def listtrainee(request):
     return render(request,'trainee_list.html', {'trainees': trainees})
 
 def addtrainee(request):
-    return render(request,'trainee_add.html')
+    courses=Course.objects.all()
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        age = request.POST.get('age')
+        courses_ids = request.POST.getlist('course')
+        trainee = Trainee.objects.create(name=name, age=age)
+        trainee.course.set(courses_ids)
+        
+        return redirect('trainee_list')
+    return render(request,'trainee_add.html', {'courses': courses})
 
 def updatetrainee(request,id):
     trainee = Trainee.objects.get(id=id)

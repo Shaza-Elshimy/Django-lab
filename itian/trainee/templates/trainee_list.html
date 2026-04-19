@@ -2,9 +2,23 @@
 
 {% block content %}
     <h3>List of trainees</h3>
-    <ul>
+    <table border="1" cellpadding="5" cellspacing="0" width="100%">
+        <tr style="background-color: #f2f2f2;">
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
         {% for trainee in trainees %}
-            <li>name:{{ trainee.name }} <br> age:{{ trainee.age }}</li>
+            <tr style="background-color: #fff;">
+                <td>{{ trainee.name }}</td>
+                <td>{{ trainee.age }}</td>
+                <td>
+                    <ul>
+                        {% for course in trainee.course.all %}
+                            <li>{{ course.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
