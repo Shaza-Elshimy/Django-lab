@@ -1,0 +1,15 @@
+{% extends 'parent.html' %}
+
+{% block content %}
+    <h3 style="text-align: center;">Trainee Details</h3>
+    <div style="background-color: aliceblue; border-radius: 15px; border: 1px solid #ccc; padding: 20px; width: 50%; margin: auto;">
+        <p><strong>Name:</strong> {{ trainee.name }}</p>
+        <p><strong>Age:</strong> {{ trainee.age }}</p>
+        <p><strong>Courses:</strong></p>
+        <ul>
+            {% for course in trainee.course.all %}
+                <li>{{ course.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

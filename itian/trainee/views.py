@@ -66,4 +66,4 @@ def deletetrainee(request,id):
 
 def gettraineebyid(request,id):
     trainee = Trainee.objects.get(id=id)
-    return render(request,'trainee_detail.html', {'trainee': trainee})
+    return render(request,'trainee_details.html', {'trainee': trainee})
