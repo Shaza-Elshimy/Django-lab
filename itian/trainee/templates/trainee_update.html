@@ -13,9 +13,7 @@
             <select id="course" name="course" multiple>
                 {% for course in courses %}
                     <option value="{{ course.id }}"
-                        {% if course in trainee.course.all %}
-                            selected
-                        {% endif %}
+
                     >
                         {{ course.name }}
                     </option>

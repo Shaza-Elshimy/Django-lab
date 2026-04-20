@@ -28,7 +28,7 @@ from django.shortcuts import redirect, render
 
 from .models import *
 # Create your views here.
-
+# function based
 def listtrainee(request):
     trainees = Trainee.objects.all()
     return render(request,'trainee_list.html', {'trainees': trainees})
@@ -63,7 +63,7 @@ def deletetrainee(request,id):
         trainee.delete()
         return redirect('trainee_list')
     return render(request,'trainee_delete.html', {'trainee': trainee})
-
+# function based
 def gettraineebyid(request,id):
     trainee = Trainee.objects.get(id=id)
     return render(request,'trainee_details.html', {'trainee': trainee})
