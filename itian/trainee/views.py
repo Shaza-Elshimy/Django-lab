@@ -28,6 +28,8 @@ from django.shortcuts import redirect, render,get_object_or_404
 from django.views import View
 from .models import *
 from .forms import TraineeForm
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
 # Create your views here.
 # function based
 def listtrainee(request):
@@ -96,12 +98,19 @@ class UpdateTraineeView(View):
     
         
     
-def deletetrainee(request,id):
-    trainee = Trainee.objects.get(id=id)
-    if request.method == 'POST':
-        trainee.delete()
-        return redirect('trainee_list')
-    return render(request,'trainee_delete.html', {'trainee': trainee})
+# def deletetrainee(request,id):
+#     trainee = Trainee.objects.get(id=id)
+#     if request.method == 'POST':
+#         trainee.delete()
+#         return redirect('trainee_list')
+#     return render(request,'trainee_delete.html', {'trainee': trainee})
+
+# generic 
+class DeleteTraineeView(DeleteView):
+    model =Trainee
+    template_name ='trainee_delete.html'
+    success_url=reverse_lazy('trainee_list')
+    
 # function based
 def gettraineebyid(request,id):
     trainee = Trainee.objects.get(id=id)
