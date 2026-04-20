@@ -27,6 +27,7 @@ from urllib import request
 from django.shortcuts import redirect, render,get_object_or_404
 from django.views import View
 from .models import *
+from .forms import TraineeForm
 # Create your views here.
 # function based
 def listtrainee(request):
@@ -48,15 +49,19 @@ def listtrainee(request):
 #class based + model form
 class AddTraineeView(View):
     def get(self,request):
-        courses=Course.objects.all()
-        return render(request,'trainee_add.html', {'courses': courses})
+        # courses=Course.objects.all()
+        form = TraineeForm()
+        return render(request,'trainee_add.html',{'form':form})
     
     def post(self,request):
-        name = request.POST.get('name')
-        age = request.POST.get('age')
-        courses_ids = request.POST.getlist('course')
-        trainee = Trainee.objects.create(name=name, age=age)
-        trainee.course.set(courses_ids)
+        # name = request.POST.get('name')
+        # age = request.POST.get('age')
+        # courses_ids = request.POST.getlist('course')
+        # trainee = Trainee.objects.create(name=name, age=age)
+        # trainee.course.set(courses_ids)
+        form = TraineeForm(request.POST)
+        if form.is_valid():
+            form.save()
         return redirect('trainee_list')
         
 # def updatetrainee(request,id):
