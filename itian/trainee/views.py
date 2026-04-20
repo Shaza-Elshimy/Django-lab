@@ -24,7 +24,7 @@
 
 from urllib import request
 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from django.views import View
 from .models import *
 # Create your views here.
@@ -72,7 +72,24 @@ class AddTraineeView(View):
 #     return render(request,'trainee_update.html', {'trainee': trainee, 'courses': courses})
 
 #class based
+class UpdateTraineeView(View):
+    def get(self,request,id):
+        trainee = Trainee.objects.get(id=id)
+        courses=Course.objects.all()
+        return render(request,'trainee_update.html', {'trainee': trainee, 'courses': courses})
+    def post(self,request,id):
+        trainee=get_object_or_404(Trainee,id=id)
+        trainee.name = request.POST.get('name')
+        trainee.age = request.POST.get('age')
+        courses_ids = request.POST.getlist('course')
+        trainee.course.set(courses_ids)
+        trainee.save()
+        return redirect('trainee_list')
+        
 
+
+    
+        
     
 def deletetrainee(request,id):
     trainee = Trainee.objects.get(id=id)
