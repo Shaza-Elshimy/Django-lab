@@ -1,25 +1,58 @@
 {% extends 'parent.html' %}
 
 {% block content %}
-    <h3  style="text-align: center;">Add a new trainee</h3>
-    <div style="background-color: aliceblue; border-radius: 15px; border: 1px solid #ccc; padding: 20px; width: 50%; margin: auto;">
-        <form method="post" style="width: 100%;">
-            {% csrf_token %}
-            <!-- <label for="name">Name:</label>
-            <input type="text" id="name" name="name"><br><br>
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age"><br><br>
-            <label for="course">Courses:</label><br><br>
-            <select id="course" name="course" multiple>
-                {% for course in courses %}
-                    <option value="{{ course.id }}">{{ course.name }}</option>
+
+<h3 style="text-align: center;">Add a new trainee</h3>
+
+<form method="post" class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md space-y-4">
+    {% csrf_token %}
+
+    <!-- Name -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Name</label>
+        {{ form.name }}
+
+        {% if form.name.errors %}
+            <p class="text-red-500 text-sm mt-1">
+                {% for error in form.name.errors %}
+                    {{ error }}
                 {% endfor %}
-            </select><br><br> -->
-            {{form.as_p}}
-            <input type="submit" value="Add Trainee" style="background-color: yellowgreen; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">
-        </form>
+            </p>
+        {% endif %}
     </div>
-        
-        
+
+    <!-- Age -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Age</label>
+        {{ form.age }}
+
+        {% if form.age.errors %}
+            <p class="text-red-500 text-sm mt-1">
+                {% for error in form.age.errors %}
+                    {{ error }}
+                {% endfor %}
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- Course -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Course</label>
+        {{ form.course }}
+
+        {% if form.course.errors %}
+            <p class="text-red-500 text-sm mt-1">
+                {% for error in form.course.errors %}
+                    {{ error }}
+                {% endfor %}
+            </p>
+        {% endif %}
+    </div>
+
+    <button type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+        Save
+    </button>
+</form>
 
 {% endblock %}

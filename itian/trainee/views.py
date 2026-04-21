@@ -67,7 +67,10 @@ class AddTraineeView(View):
         form = TraineeForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('trainee_list')
+            return redirect('trainee_list')
+        return render(request,'trainee_add.html',{'form':form})
+
+    
         
 # def updatetrainee(request,id):
 #     trainee = Trainee.objects.get(id=id)
