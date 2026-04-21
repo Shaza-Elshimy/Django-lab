@@ -157,3 +157,14 @@ def trainee_list_create_api(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+    
+@api_view(['GET','DELETE'])
+def trainee_details_delete_api(request,id):
+    trainee=get_object_or_404(Trainee,id=id)
+    if request.method =='GET':
+        serializer=TraineeSerializer(trainee)
+        return Response(serializer.data)
+    
+    elif request.method =='DELETE':
+        trainee.delete()
+        return Response(status=204)
