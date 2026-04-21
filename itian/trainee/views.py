@@ -132,3 +132,28 @@ class DeleteTraineeView(UpdateView):
 def gettraineebyid(request,id):
     trainee = Trainee.objects.get(id=id)
     return render(request,'trainee_details.html', {'trainee': trainee})
+
+
+# --------------------------------------------------------------------------------------------
+# api views
+from .models import Trainee
+from .serializers import TraineeSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+
+@api_view(['GET', 'POST'])
+def trainee_list_create_api(request):
+
+    if request.method == 'GET':
+        trainees = Trainee.objects.all()
+        serializer = TraineeSerializer(trainees, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = TraineeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
