@@ -18,7 +18,7 @@ class TraineeForm(forms.ModelForm):
         }
     def clean_age(self):
         age=self.cleaned_data.get('age')
-        if age < 15:
+        if age < 21:
             raise forms.ValidationError('minimum age is 15')
         return age
     

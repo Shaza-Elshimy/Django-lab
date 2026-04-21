@@ -11,5 +11,5 @@ urlpatterns=[
     path('<int:id>/',gettraineebyid,name='trainee_details'),
 
     path('api/trainees', trainee_list_create_api, name='api-trainee-list'),
-    path('api/trainees/<int:id>/', trainee_details_delete_api, name='api-trainee-details_delete'),
+    path('api/trainees/<int:id>/', trainee_details_update_delete_api, name='api-trainee-details_update_delete')
 ]
