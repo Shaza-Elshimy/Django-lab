@@ -29,12 +29,15 @@ from django.views import View
 from .models import *
 from .forms import TraineeForm
 from django.views.generic import DeleteView
+from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 # Create your views here.
 # function based
 def listtrainee(request):
-    trainees = Trainee.objects.all()
-    return render(request,'trainee_list.html', {'trainees': trainees})
+    # trainees = Trainee.objects.all()
+    trainees=Trainee.objects.filter(is_deleted=False)
+    deleted_trainees=Trainee.objects.filter(is_deleted=True)
+    return render(request,'trainee_list.html', {'trainees': trainees,'deleted_trainees':deleted_trainees})
 
 # def addtrainee(request):
 #     courses=Course.objects.all()
@@ -106,11 +109,22 @@ class UpdateTraineeView(View):
 #     return render(request,'trainee_delete.html', {'trainee': trainee})
 
 # generic 
-class DeleteTraineeView(DeleteView):
+# class DeleteTraineeView(DeleteView):
+#     model =Trainee
+#     template_name ='trainee_delete.html'
+#     success_url=reverse_lazy('trainee_list')
+
+#    soft delete 
+class DeleteTraineeView(UpdateView):
     model =Trainee
+    fields=[]
     template_name ='trainee_delete.html'
     success_url=reverse_lazy('trainee_list')
-    
+    def form_valid(self,form):
+        self.object.is_deleted=True
+        self.object.save()
+        return super().form_valid(form)
+
 # function based
 def gettraineebyid(request,id):
     trainee = Trainee.objects.get(id=id)

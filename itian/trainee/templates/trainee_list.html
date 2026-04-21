@@ -32,5 +32,11 @@
         {% endfor %}
     </table>
     <br><br>
+    
     <a href="{% url 'trainee_add' %}" style="background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Add New Trainee</a>
+    <br><br>
+    <h2>deleted trainees :-</h2>
+    {%for t in deleted_trainees%}
+    <p style="color:red">{{t.name}}(deleted)</p>
+    {% endfor %}
 {% endblock %}
