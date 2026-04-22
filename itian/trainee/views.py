@@ -138,12 +138,14 @@ def gettraineebyid(request,id):
 # api views
 from .models import Trainee
 from .serializers import TraineeSerializer
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 
 @api_view(['GET', 'POST'])
+@permission_classes({IsAuthenticated})
 def trainee_list_create_api(request):
 
     if request.method == 'GET':
@@ -159,6 +161,7 @@ def trainee_list_create_api(request):
         return Response(serializer.errors, status=400)
     
 @api_view(['GET','PUT','DELETE'])
+@permission_classes({IsAuthenticated})
 def trainee_details_update_delete_api(request,id):
     trainee=get_object_or_404(Trainee,id=id)
     if request.method =='GET':
